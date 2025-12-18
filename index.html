@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <meta charset="UTF-8" />
+  <title>Academic Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar"></aside>
+
+    <!-- Main content -->
+    <main class="content" id="content">
+      <!-- Sections generated from data.js -->
+    </main>
+  </div>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/sidebar.js"></script>
+  <script src="assets/js/pubs-data.js"></script> 
+  <script src="assets/js/main.js"></script>
+
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lightbox-toolbar">
+    <button id="lbZoomOut" type="button" aria-label="Zoom out">−</button>
+    <button id="lbZoomIn" type="button" aria-label="Zoom in">+</button>
+    <button id="lbReset" type="button" aria-label="Reset zoom">Reset</button>
+    <button id="lbClose" type="button" aria-label="Close">✕</button>
+  </div>
+
+  <div id="lbStage" class="lightbox-stage">
+    <img id="lbImg" alt="">
+  </div>
+</div>
+
+</body>
+</html>

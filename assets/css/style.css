@@ -1,0 +1,662 @@
+:root {
+  --bg: #f5f5f7;
+  --bg-alt: #ffffff;
+  --text: #111827;
+  --text-soft: #4b5563;
+  --accent: #2563eb;
+  --border: #e5e7eb;
+  --chip-bg: #e5e7eb;
+  --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+body.dark {
+  --bg: #020617;
+  --bg-alt: #020617;
+  --text: #e5e7eb;
+  --text-soft: #9ca3af;
+  --accent: #38bdf8;
+  --border: #1f2937;
+  --chip-bg: #111827;
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #c7d2fe 0, transparent 55%),
+    radial-gradient(circle at bottom right, #bae6fd 0, transparent 50%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Layout */
+
+.layout {
+  max-width: 1180px;
+  margin: 32px auto;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: minmax(260px, 350px) minmax(0, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    margin-top: 16px;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
+
+/* Sidebar */
+
+.sidebar {
+  position: sticky;
+  top: 16px;
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px 22px;
+  border: 1px solid var(--border);
+  transition: background 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+body.dark .sidebar {
+  background: rgba(15, 23, 42, 0.96);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+/* New wrapper: nav + theme icon in one row */
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* Nav inside sidebar-top: remove top border/margin here */
+.sidebar-top .nav {
+  margin-top: 0;
+  border-top: none;
+  padding-top: 0;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+/* Keep theme button small but aligned */
+.theme-toggle {
+  flex-shrink: 0;
+}
+
+/* Adjust existing .sidebar-header to be vertical */
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+/* Row for avatar + text */
+.sidebar-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Make sure sidebar-text doesn’t stretch oddly */
+.sidebar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Optional: slightly smaller spacing on very small screens */
+@media (max-width: 600px) {
+  .sidebar-top {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .sidebar-top .nav {
+    flex: 1;
+  }
+
+  .sidebar-header-row {
+    align-items: flex-start;
+  }
+}
+
+
+.avatar {
+  width: 130px;
+  height: 150px;
+  border-radius: 100px;
+  background: var(--chip-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.title {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+.location {
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.theme-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  cursor: pointer;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 6px;
+}
+
+.chip {
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.sidebar-section {
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+.sidebar-section h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+
+.sidebar-section ul {
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  font-size: 0.86rem;
+}
+
+.sidebar-section a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.sidebar-section a:hover {
+  text-decoration: underline;
+}
+
+/* Nav */
+
+.nav {
+  margin-top: 18px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nav button {
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  padding: 5px 9px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav button:hover {
+  background: var(--chip-bg);
+  color: var(--text);
+}
+
+.nav button.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* Main content */
+
+.content {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 24px 26px 28px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark .content {
+  background: rgba(15, 23, 42, 0.96);
+}
+
+.section {
+  padding: 10px 0 20px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.section-kicker {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+}
+
+.section p {
+  font-size: 0.93rem;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+
+/* Reusable patterns */
+
+.inline-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 6px 0 2px;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.pill {
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text-soft);
+}
+
+/* Timeline */
+
+.timeline {
+  display: grid;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.timeline-item {
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+body.dark .timeline-item {
+  background: #020617;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.timeline-role {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.timeline-org {
+  font-size: 0.86rem;
+  color: var(--text-soft);
+}
+
+.timeline-meta {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* Publications */
+
+.pub-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.pub-title {
+  font-weight: 500;
+}
+
+.pub-meta {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* Contact */
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.contact-card {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+body.dark .contact-card {
+  background: #020617;
+}
+
+.contact-card h4 {
+  font-size: 0.84rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+/* Grid layout: 3 icons per row */
+.profiles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 12px; /* row-gap, column-gap */
+  padding: 4px 0;
+  list-style: none;
+}
+
+/* Each icon element centered inside its grid cell */
+.profile-icon-link {
+  display: flex;
+  flex-direction: column; /* icon over text */
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.75rem;
+}
+
+.profile-icon {
+  font-size: 1.5rem;   /* icon size */
+  margin-bottom: 4px;
+  opacity: .85;
+  transition: .2s;
+}
+
+.profile-icon:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Make labels smaller */
+.profile-icon-link span {
+  font-size: 0.68rem;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Mobile: fewer columns */
+@media (max-width: 600px) {
+  .profiles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Make icon and text sit next to each other */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;         /* spacing between icon and text */
+  margin-bottom: 10px;
+}
+
+/* Icon styling */
+.contact-icon {
+  font-size: 1.3rem;
+  width: 26px;       /* keeps icons aligned perfectly */
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* Text styling */
+.contact-text {
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+/* Footer at bottom of sidebar */
+.sidebar-footer {
+  font-size: 0.60rem;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  line-height: 1.3;
+}
+
+.sidebar-footer .footer-link {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.sidebar-footer .footer-link:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Responsive grid: adapts to screen size */
+.diagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* Diagram box layout */
+.diagram-box {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 10px 12px;
+}
+
+/* Image container keeps aspect ratio and scales nicely */
+.diagram-img-wrap {
+  margin-top: 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: transparent;
+  aspect-ratio: 16 / 9;     /* change to 4/3 if you prefer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diagram-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* keep entire figure visible */
+  cursor: zoom-in;
+}
+
+/* Smaller screens: slightly smaller columns */
+@media (max-width: 520px) {
+  .diagram-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lightbox overlay */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.86);
+  display: none;
+  z-index: 9999;
+}
+
+.lightbox.open {
+  display: block;
+}
+
+.lightbox-toolbar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.lightbox-toolbar button {
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.lightbox-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 16px 16px; /* top padding to avoid toolbar overlap */
+}
+
+.lightbox-stage img {
+  max-width: 92vw;
+  max-height: 82vh;
+  transform-origin: center center;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.lightbox-stage img:active {
+  cursor: grabbing;
+}
+
+/* Global text justification */
+body {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+
+/* Reduce spacing between contact items */
+#contactList {
+  padding-left: 0;
+  margin: 0;
+}
+
+#contactList li {
+  margin-bottom: 4px;   /* default is usually ~12–16px */
+  line-height: 1.25;
+}
+
